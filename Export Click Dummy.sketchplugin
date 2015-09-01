@@ -86,8 +86,9 @@ function exportClickDummy () {
         }
 
         if (typeof layer.frame === 'function') {
-          var lx = layer.frame().x();
-          var ly = layer.frame().y();
+          var frame = layerFrameRelativeToArtboard(layer, artboard);
+          var lx = frame.x;
+          var ly = frame.y;
           var lw = layer.frame().width();
           var lh = layer.frame().height();
           html = html + '<a href="' + linkTarget + '" style="left: ' + lx + 'px; top: ' + ly + 'px; width: ' + lw + 'px; height: ' + lh + 'px"></a>\n';
@@ -100,7 +101,7 @@ function exportClickDummy () {
     saveTextToFile(htmlPath, html);
   }
 
-  hideLinkLayers();
+  //hideLinkLayers();
 
   var slices = doc.currentPage().artboards().objectEnumerator();
 

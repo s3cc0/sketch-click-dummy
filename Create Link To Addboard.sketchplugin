@@ -1,0 +1,35 @@
+// (shift control cmd l)
+
+#import 'library.js'
+
+log('This is an example Sketch script.');
+
+  var documentName = context.document.displayName();
+  log('The current document is named: ' + documentName);
+
+  var selectedLayers = context.selection;
+  var selectedCount = selectedLayers.count();
+
+  if (selectedCount == 0) {
+    log('No layers are selected.');
+  } else {
+    log('Selected layers:');
+  var layername = "linkto:";
+    for (var i = 0; i < selectedCount; i++) {
+      var layer = selectedLayers[i];
+    if(layer instanceof MSArtboardGroup)
+    {
+      layername += layer.name();
+      break;
+    }
+    }
+  log(layername);
+    for (var i = 0; i < selectedCount; i++) {
+      var layer = selectedLayers[i];
+    if(!(layer instanceof MSArtboardGroup))
+    {
+      layer.setName(layername);
+    log("name changed for layer: " + layername)
+    }
+    }
+  };

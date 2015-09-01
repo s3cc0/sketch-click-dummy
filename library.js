@@ -12,6 +12,16 @@ function toggleLinkLayers() {
   return showOrHideLinkLayers (-1);
 }
 
+function layerFrameRelativeToArtboard(layer, artboard) {
+
+  var frame = {};
+  frame.x = (artboard.absoluteRect().x() - layer.absoluteRect().x()) * -1.0;
+  frame.y = (artboard.absoluteRect().y() - layer.absoluteRect().y()) * -1.0;
+
+  return frame;
+
+}
+
 function showOrHideLinkLayers (shouldShowLayers) {
   var layers = doc.currentPage().children().objectEnumerator();
   while (layer = layers.nextObject()) {
