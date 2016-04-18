@@ -4,6 +4,10 @@ Exports a simple HTML click dummy so you can easily prototype flows between your
 
 ![Sketch Click Dummy](https://cloud.githubusercontent.com/assets/418877/5471648/6ff1f756-85f8-11e4-9645-05e76d699709.png)
 
+## change-log
+
+* 2016-04-18 17:47:13 - now, linkto: links will also work again for symboles since sketch update 3.7
+
 # Installation
 Download this plugin and [put it in your Sketch plugins folder](http://bohemiancoding.com/sketch/support/developer/01-introduction/01.html).
 

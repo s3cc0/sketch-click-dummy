@@ -16,6 +16,9 @@ function exportClickDummy () {
 
   // HTML will be exported to a new folder in the .sketch file's parent folder
   // var exportPath = [[doc fileURL] path] + '-ClickDummy/';
+  
+  var pageName = doc.currentPage().name();
+  var isAndroid = pageName.indexOf('android') !== -1 ? true : false;
 
   var html = '';
   var artboardNames = [];
@@ -58,6 +61,9 @@ function exportClickDummy () {
 
   createFolder(exportPath);
 
+  var undoManager = doc.undoManager();
+  undoManager.beginMasterUndoGrouping();
+
   while (artboard = artboards.nextObject()) {
 
     var artboardName = artboard.name().trim();
@@ -70,6 +76,15 @@ function exportClickDummy () {
 
     var layers = artboard.children().objectEnumerator();
 
+    // go through all layers and remove symboles
+    while (layer = layers.nextObject()) {
+      if(layer.class() == 'MSSymbolInstance') // layer.name() == 'Navigation')
+      {
+        layer.detachByReplacingWithGroup();
+      }
+    }
+
+    layers = artboard.children().objectEnumerator();
     while (layer = layers.nextObject()) {
 
       var name = layer.name();
@@ -101,6 +116,9 @@ function exportClickDummy () {
     var htmlPath = exportPath + transliterateString(artboardName) + '.html';
     saveTextToFile(htmlPath, html);
   }
+
+  undoManager.undo();
+  undoManager.endMasterUndoGrouping();
 
   //hideLinkLayers();
 
