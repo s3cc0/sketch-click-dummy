@@ -66,7 +66,7 @@ function exportClickDummy () {
 
     html = HTML_HEAD;
     html += '<!-- ' + artboardName + ' -->\n';
-    html += '<img src="img/' + artboardName + '.png">\n';
+    html += '<img src="img/' + transliterateString(artboardName) + '.png">\n';
 
     var layers = artboard.children().objectEnumerator();
 
@@ -78,6 +78,7 @@ function exportClickDummy () {
 
         var linkTarget = name.substr(linkLayerPrefix.length);
         linkTargets.push(linkTarget);
+        linkTarget = transliterateString(linkTarget+'');
 
         if (linkTarget !== '' && linkTarget !== null && linkTarget !== undefined) {
           linkTarget = linkTarget + '.html';
@@ -97,7 +98,7 @@ function exportClickDummy () {
     }
     html += HTML_FOOT;
 
-    var htmlPath = exportPath + artboardName + '.html';
+    var htmlPath = exportPath + transliterateString(artboardName) + '.html';
     saveTextToFile(htmlPath, html);
   }
 
@@ -106,7 +107,7 @@ function exportClickDummy () {
   var slices = doc.currentPage().artboards().objectEnumerator();
 
   while (slice = slices.nextObject()) {
-    [doc saveArtboardOrSlice:slice toFile:exportPath + 'img/' + slice.name() + '.png'];
+    [doc saveArtboardOrSlice:slice toFile:exportPath + 'img/' + transliterateString(slice.name()) + '.png'];
   }
 
   showLinkLayers();
